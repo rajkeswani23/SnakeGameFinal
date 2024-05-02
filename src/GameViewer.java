@@ -6,13 +6,13 @@ public class GameViewer extends JFrame {
     private final int WINDOW_WIDTH = 1010;
     private final int WINDOW_HEIGHT = 810;
     private final int CELL_SIZE = 50; // Size of each cell in the grid
-    private Image[] fishImages;
+    private Image[] appleImages;
     private Game game;
 
 
     public GameViewer(Game game)
     {
-        this.fishImages = fishImages;
+        this.appleImages = appleImages;
         this.game = game;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Snake");
@@ -22,22 +22,22 @@ public class GameViewer extends JFrame {
     }
 
     public void myPaint(Graphics g) {
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 16; j++) {
-                g.setColor(Color.WHITE);
-                g.fillRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                g.setColor(Color.LIGHT_GRAY);
-                g.drawRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-            }
-        }
-        drawSnake(g);
+        draw(g);
     }
 
-    private void drawSnake(Graphics g) {
+    private void draw(Graphics g) {
+        g.setColor(Color.WHITE);
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 16; j++) {
+                {
+                    g.fillRect( game.getGrid()[j][i].getX() * CELL_SIZE,  game.getGrid()[j][i].getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                }
+            }
+        }
 
         for (int i = 0; i < 16; i++) {
             for (int j = 0; j < 16; j++) {
-                if (game.getGrid()[j][i] != null) {
+                {
                     game.getGrid()[j][i].draw(g, CELL_SIZE);
                 }
             }

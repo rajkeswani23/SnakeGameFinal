@@ -26,9 +26,8 @@ class Cell {
     public void setY(int y) {
         this.y = y;
     }
-
     public void draw(Graphics g, int cellSize) {
-        g.setColor(Color.RED);
-        g.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawRect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
 }

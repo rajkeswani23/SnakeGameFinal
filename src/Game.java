@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class Game implements ActionListener, KeyListener {
     private final int GRID_SIZE = 16;
-    private SnakeCell[][] grid;
+    private Cell[][] grid;
     private LinkedList<SnakeCell> snake;
     private String direction;
     private Timer gameTimer;
@@ -16,7 +16,14 @@ public class Game implements ActionListener, KeyListener {
 
     public Game()
     {
-        grid = new SnakeCell[GRID_SIZE][GRID_SIZE];
+        grid = new Cell[GRID_SIZE][GRID_SIZE];
+        for (int i = 0; i < GRID_SIZE; i++)
+        {
+            for (int j = 0; j < GRID_SIZE; j++)
+            {
+                grid[i][j] = new Cell(j, i);
+            }
+        }
         snake = new LinkedList<>();
         this.currentX = currentX;
         this.currentY = currentY;
@@ -25,13 +32,12 @@ public class Game implements ActionListener, KeyListener {
         window = new GameViewer(this);
         window.addKeyListener(this);
 
-
-        gameTimer = new Timer(250, this);
+        gameTimer = new Timer(100, this);
         gameTimer.start();
         createSnake();
     }
 
-    public SnakeCell[][] getGrid()
+    public Cell[][] getGrid()
     {
         return grid;
     }
@@ -66,7 +72,7 @@ public class Game implements ActionListener, KeyListener {
 
     private void moveSnake() {
         SnakeCell tail = snake.remove();
-        grid[tail.getY()][tail.getX()] = null;
+        grid[tail.getY()][tail.getX()] = new Cell(tail.getX(), tail.getY());
         int newX = currentX;
         int newY = currentY;
 
@@ -100,7 +106,7 @@ public class Game implements ActionListener, KeyListener {
         // Move the head to the new position
         SnakeCell head = new SnakeCell(newX,newY);
         snake.add(head);
-        if(grid[newY][newX] == null)
+        if(!(grid[newY][newX] instanceof SnakeCell))
         {
             grid[newY][newX] = head;
         }
