@@ -1,33 +1,44 @@
-import java.awt.*;
+// Raj Keswani
+// May 10 2024
 
-class Cell {
+import java.awt.*;
+import java.awt.Color;
+
+class Cell
+{
     private int x;
     private int y;
     private GameViewer view;
 
-    public Cell(int x, int y) {
+    public Cell(int x, int y)
+    {
         this.x = x;
         this.y = y;
         this.view = view;
     }
 
-    public int getX() {
+    public int getX()
+    {
         return x;
     }
 
-    public int getY() {
+    public int getY()
+    {
         return y;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-    public void draw(Graphics g, int cellSize) {
-        g.setColor(Color.LIGHT_GRAY);
-        g.drawRect(x * cellSize, y * cellSize, cellSize, cellSize);
+    // Method for regular cell to draw itself
+    public void draw(Graphics g, int cellSize, int num)
+    {
+        // Alternates between different green colors for each square
+        if (num % 2 == 0)
+        {
+            g.setColor(new Color(34,183,23));
+        }
+        else
+        {
+            g.setColor(new Color(22,134,14));
+        }
+        g.fillRect(x * cellSize + 50, y * cellSize + 100, cellSize, cellSize);
     }
 }
